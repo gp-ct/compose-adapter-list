@@ -3,6 +3,7 @@ package com.example.adapterlisttest.model
 import androidx.compose.Model
 import androidx.compose.frames.ModelList
 import androidx.compose.frames.modelListOf
+import com.example.adapterlisttest.data.Contact
 import com.example.adapterlisttest.data.contactTypes
 import java.lang.StringBuilder
 
@@ -10,7 +11,7 @@ import java.lang.StringBuilder
 object ListModel {
 
     //Model object to track the state of the list of contacts
-    val contactList: ModelList<Pair<String, String>> = modelListOf(Pair("Load More Contacts", ""))
+    val contactList: ModelList<Any> = modelListOf("Load More Contacts")
 
     init {
         //Load initial contacts
@@ -27,7 +28,7 @@ object ListModel {
 
             val phoneNumber = phoneBuilder.toString()
 
-            contactList.add(0, Pair(contactTypes.random().toString(), phoneNumber))
+            contactList.add(0, Contact(contactTypes.random().toString(), phoneNumber))
         }
     }
 }

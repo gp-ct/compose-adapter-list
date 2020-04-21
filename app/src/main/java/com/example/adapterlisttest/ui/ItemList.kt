@@ -10,6 +10,7 @@ import androidx.ui.material.MaterialTheme
 import androidx.ui.res.vectorResource
 import androidx.ui.tooling.preview.Preview
 import com.example.adapterlisttest.R
+import com.example.adapterlisttest.data.Contact
 import com.example.adapterlisttest.model.ListModel
 
 @Preview
@@ -25,19 +26,19 @@ fun ItemList() {
     AdapterList(
         data = ListModel.contactList
     ) { item ->
-        val isLastItem = (item == ListModel.contactList[ListModel.contactList.lastIndex])
 
         //Always show the LoadMoreContactsItem at the end of the list
-        if (!isLastItem) {
-            Contact(item.first, item.second)
+        if (item is Contact) {
+            ContactItem(item.contactType, item.phoneNumber)
         } else {
-            LoadMoreContactsItem(item.first)
+            LoadMoreContactsItem(item as String)
         }
+
     }
 }
 
 @Composable
-fun Contact(contactType: String, phoneNumber: String){
+fun ContactItem(contactType: String, phoneNumber: String) {
     ListItem(
         icon = {
             Image(
